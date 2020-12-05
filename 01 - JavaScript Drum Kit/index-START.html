@@ -59,24 +59,26 @@
 
 <script>
 
-function removeTransition(e) {
-    if (e.propertyName !== 'transform') return; // remove playing class if this elements classes have changed
-    e.target.classList.remove('playing'); // remove playing class
+// this fn checks if the event object doesnt have a transform property return, or if it does, remove playing class from it.
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
   }
-
+  
+// play sound associated with data-key
   function playSound(e) {
-    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`); // find audio with data key that matched data key of key thats hit
-    const key = document.querySelector(`div[data-key="${e.keyCode}"]`); // find key with matching data-key
-    if (!audio) return; // if this key doesnt exist.. return
-
-    key.classList.add('playing'); // add classlist to this element
-    audio.currentTime = 0; // allows us to hit the same key quickly
-    audio.play(); // play the audio 
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+    // play the sound and set its time to 0 so we can play it quickly again
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
   }
-
-  const keys = Array.from(document.querySelectorAll('.key')); // find all tage with .key class
-
-  keys.forEach(key => key.addEventListener('transitionend', removeTransition)); // for everything inthis array, add an event listener to it
+// find all elements with .key class
+  const keys = document.querySelectorAll('.key');
+// for each of these, add eListener listening for transitionend then remove transition (color)
+  keys.forEach(key => key.addEventListener("transitionend", removeTransition));
 
   window.addEventListener('keydown', playSound);
 </script>
