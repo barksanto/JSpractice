@@ -21,7 +21,22 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root{
+      --base: yellow;
+      --spacing: 10px;
+      --blur: 10px;
+    }
 
+
+    img{
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl{
+      color: var(--base);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -45,6 +60,21 @@
   </style>
 
   <script>
+    // target all the input tags that are children of the .controls div
+    const inputs = document.querySelectorAll('.controls input'); 
+
+
+    function handleUpdate(){
+      // finds data-sizing attribute or if doesnt have one just carry on- this is to get px
+      const suffix = this.dataset.sizing || '';
+      // check the document, look at the element and change the value of :root classes.
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+      // console.log(suffix);
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
   </script>
 
 </body>
