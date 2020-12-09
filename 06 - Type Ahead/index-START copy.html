@@ -20,17 +20,18 @@ const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb
 // array to store api data
 const cities = [];
 // go to endpoint fetch that raw data I'm calling blob. Parse it to json
-  //use spread to push data into the array 
 fetch(endpoint)
   .then(blob => blob.json())
+  //use spread to push data into the array 
   .then(data => cities.push(...data));
 
 //create a function to find matches of input
+function findMatches(wordToMatch, cities){
+  return cities.filter(place => {
     // here we need to find if city/state matches what was searched
     // search with regex, flags are global and case insensitive
-function findMatches(wordToMatch, cities){
-  return cities.filter(place => { // loopthrough each city/place and return whatever matches the regex
     const regex = new RegExp(wordToMatch, 'gi');
+    
     return place.city.match(regex) || place.state.match(regex);
   });
 }
@@ -40,20 +41,19 @@ function displayMatches(){
   const html = matchArray.map(place => {
     return `
       <li>
-        <span class="name"> ${place.city}, ${place.state}</span>
-        <span class="population"> ${place.population}</span>
+        <span class="name">${place.city}, ${place.state}</span>
+        <span class="population">${place.population}</span>
       </li>
     `;
-  }).join("");
-  suggestions.innerHTML = html;
-} 
+  }).join(""); // join helps return an array of on big string instead of an arr w mult items
+  suggestions.innerHTML= html;
+}
 
 const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions');
-  
+
 searchInput.addEventListener('change', displayMatches);
 searchInput.addEventListener('keyup', displayMatches);
-
 
 </script>
 </body>
