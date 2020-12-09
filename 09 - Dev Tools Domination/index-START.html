@@ -6,7 +6,7 @@
 </head>
 <body>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+  <p onClick="makeGreen()" class='banana'>×BREAK×DOWN×</p>
 
   <script>
     const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
@@ -18,29 +18,64 @@
     }
 
     // Regular
-
+    console.log('hello');
     // Interpolated
-
+    console.log("I am a %s dog!", '🐶');
     // Styled
-
+    console.log("%cI am some red text", 'color:red; background:blue;')
     // warning!
-
+    console.warn('OH NO!');
     // Error :|
-
+    console.error('This is an error!!');
     // Info
-
+    console.info('Dogs are amazing!');
     // Testing
-
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('ouch'), 'That is wrong');
     // clearing
-
+    console.clear();
     // Viewing DOM Elements
-
+    console.log(p)
+    console.dir(p) //see all the functions we can use on that element
     // Grouping together
+    dogs.forEach(dog => {
+      //short way.. can also do groupCollapsed so when they show up in console its a smaller list initially
+      console.group(`${dog.name}`);
 
+      // long way 
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age}`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+
+      console.groupEnd();
+      })
     // counting
+    
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    // timing- see how long something takes
 
-    // timing
+    console.clear();
+    console.time('fetching data');
+    fetch('https://api.github.com/users/barksanto')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data'); //pass the same string we used to start it
+        console.log(data);
+      });
 
+      //console.table takes an array of objects and assuming they have the same properties itll make a table
+      console.table(dogs);
   </script>
 </body>
 </html>
