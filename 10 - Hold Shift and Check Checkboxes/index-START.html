@@ -101,8 +101,9 @@ let lastChecked;
 
 function handleCheck(e){
   let inBetween = false;
-  // if the event included a shift key and the element I selected is checked...
-  // loop over every checkbox
+  // if the event included a shift key and the element I selected is checked
+  // loop over every checkbox - if the box is the one I checked, or the last box checked...
+  // change the value of everything inBetween and to true and then mark it as checked. 
   if (e.shiftKey && this.checked){
     boxes.forEach(box => {
       if (box === this || box == lastChecked){
@@ -117,10 +118,7 @@ function handleCheck(e){
   lastChecked = this;
 }
 
-
-
 boxes.forEach(box => box.addEventListener('click', handleCheck ));
-
 
 </script>
 </body>
