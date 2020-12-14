@@ -108,8 +108,12 @@ function handleCheck(e){
     boxes.forEach(box => {
       console.log(box);
       if (box === this || box === lastChecked){
-        inBetween != inBetween
-        console.log("starting to check them inbetween")
+        inBetween = !inBetween;
+        console.log("starting to check them inbetween");
+      }
+
+      if(inBetween){
+        box.checked = true;
       }
     });
   }
