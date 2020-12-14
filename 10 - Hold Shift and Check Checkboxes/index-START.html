@@ -39,7 +39,7 @@
       margin: 20px;
     }
 
-    p {
+    label {
       margin: 0;
       padding: 20px;
       transition: background 0.2s;
@@ -59,43 +59,66 @@
   <div class="inbox">
     <div class="item">
       <input type="checkbox">
-      <p>This is an inbox layout.</p>
+      <label>This is an inbox layout.</label>
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Check one item</p>
+      <label>Check one item</label>
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Hold down your Shift key</p>
+      <label>Hold down your Shift key</label>
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Check a lower item</p>
+      <label>Check a lower item</label>
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Everything in between should also be set to checked</p>
+      <label>Everything in between should also be set to checked</label>
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Try to do it without any libraries</p>
+      <label>Try to do it without any libraries</label>
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Just regular JavaScript</p>
+      <label>Just regular JavaScript</label>
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Good Luck!</p>
+      <label>Good Luck!</label>
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Don't forget to tweet your result!</p>
+      <label>Don't forget to tweet your result!</label>
     </div>
   </div>
 
 <script>
+const boxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+let lastChecked;
+
+function handleCheck(e){
+  let inBetween = false;
+  // if the event included a shift key and the element I selected is checked...
+  // loop over every checkbox
+  if(e.shiftKey && this.checked){
+    boxes.forEach(box => {
+      console.log(box);
+      if (box === this || box === lastChecked){
+        inBetween != inBetween
+        console.log("starting to check them inbetween")
+      }
+    });
+  }
+  lastChecked = this;
+}
+
+boxes.forEach(box => box.addEventListener('click', handleCheck ));
+
+
 </script>
 </body>
 </html>
