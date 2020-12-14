@@ -97,10 +97,48 @@
 
 <script>
 const boxes = document.querySelectorAll('.inbox input[type="checkbox"]');
-
 let lastChecked;
 
 function handleCheck(e){
+  let inBetween = false;
+  // if the event included a shift key and the element I selected is checked...
+  // loop over every checkbox
+  if (e.shiftKey && this.checked){
+    boxes.forEach(box => {
+      if (box === this || box == lastChecked){
+        inBetween = !inBetween
+      }
+
+      if(inBetween){
+        box.checked = true;
+      }
+    })
+  }
+  lastChecked = this;
+}
+
+
+
+boxes.forEach(box => box.addEventListener('click', handleCheck ));
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- function handleCheck(e){
   let inBetween = false;
   // if the event included a shift key and the element I selected is checked...
   // loop over every checkbox
@@ -118,11 +156,4 @@ function handleCheck(e){
     });
   }
   lastChecked = this;
-}
-
-boxes.forEach(box => box.addEventListener('click', handleCheck ));
-
-
-</script>
-</body>
-</html>
+} -->
