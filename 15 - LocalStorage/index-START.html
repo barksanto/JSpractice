@@ -33,7 +33,28 @@
   function addItem(e){
     //form submit default is to reload the page so we're preventing it here
     e.preventDefault();
-    console.log("hello");
+    // 'this' is the form we already have due to the event, then we find its value (input)
+    const text = (this.querySelector('[name = item]')).value;
+    const item = {
+      text,   // ortext: text,
+      done: false
+    };
+    // push new item into items array
+    items.push(item);
+    populateList(items, itemsList);
+    // reset the form - 'this' is the form element and forms have a method called reset that we can use
+    this.reset();
+  }
+
+  function populateList(plates = [], platesList){
+    platesList.innerHTML = plates.map((plate, index) => {
+      return `
+        <li>
+          <input type="checkbox" data-index=${index} id="item${index}"/>
+          <label for="item${index}">${plate.text}<label>
+        </li> 
+      `;
+    }).join(''); //join takes teh array and turns it to one big string
   }
 
   addItems.addEventListener('submit', addItem);
