@@ -42,6 +42,7 @@
     // push new item into items array
     items.push(item);
     populateList(items, itemsList);
+    localStorage.setItem('items', JSON.stringify(items));
     // reset the form - 'this' is the form element and forms have a method called reset that we can use
     this.reset();
   }
@@ -50,12 +51,14 @@
     platesList.innerHTML = plates.map((plate, index) => {
       return `
         <li>
-          <input type="checkbox" data-index=${index} id="item${index}"/>
+          <input type="checkbox" data-index=${index} id="item${index}" ${plate.done ? 'checked' : ''}/> 
           <label for="item${index}">${plate.text}<label>
         </li> 
       `;
     }).join(''); //join takes teh array and turns it to one big string
   }
+
+
 
   addItems.addEventListener('submit', addItem);
 
