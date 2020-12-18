@@ -10,11 +10,15 @@
   let konamiArr = []
   const secretCode = 'barkley';
   window.addEventListener('keyup', (e) => {
-    console.log(e.key);
+    // console.log(e.key);
     konamiArr.push(e.key);
     konamiArr.splice(-konamiArr.length - 1, konamiArr.length - secretCode.length);
-    console.log(konamiArr);
-
+    if(konamiArr.join('').includes(secretCode)){
+      console.log("You guessed the code!");
+      cornify_add()
+    } else {
+      console.log('not yet');
+    }
   })
 </script>
 </body>
