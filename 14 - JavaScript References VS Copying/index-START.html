@@ -13,11 +13,13 @@
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
-
+      // team is just a reference to the original array - not a different array
+    const team = players;
+    console.log(players, team)
     // You might think we can just do something like this:
-
+    // team[3] = "Lux";
     // however what happens when we update that array?
-
+     
     // now here is the problem!
 
     // oh no - we have edited the original array too!
@@ -25,13 +27,18 @@
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
     // So, how do we fix this? We take a copy instead!
-
+    const team2 = team.slice();
     // one way
-
+    team2[3] = "Lux";
     // or create a new array and concat the old one in
-
+    const team3 = [].concat(players);
     // or use the new ES6 Spread
+    //takes every item out of our iterable and puts them into the containing array
+    const team4 = [...players];
+    team4[3] = "yeehawwww"
+    // console.log(team4)
 
+    const team5 = Array.from(players)
     // now when we update it, the original one isn't changed
 
     // The same thing goes for objects, let's say we have a person object
@@ -43,13 +50,32 @@
     };
 
     // and think we make a copy:
-
+    // const captain = person;
+    // captain.age = 99; // doesnt work , like the original example because we're changing the original array
     // how do we take a copy instead?
+    // start with empty object, pass it the obj we want to copy properties from, then fold in the new properties we want to overwrite
+    const cap2 = Object.assign({}, person, {age: 1, number: 99});
 
     // We will hopefully soon see the object ...spread
-
+    // works the same as array spread
+    const cap3 = {...person} // not in JS YET
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const bark ={
+      name: 'barkley',
+      age: 27,
+      social: {
+        fb: 'blue',
+        gh: 'black'
+      }
+    }
 
+    // const dev = Object.assign({}, bark);
+    // dev.name = "BARKS"
+    // dev.social.fb = 'newFACE' // BAD this changes the value of original object too because assign only goes 1 level deep
+    // theres a method called deepclone we can use - find in goodgle
+    // POOR MANS deepclone - parse it into a string and then back into an object
+    const dev2 = JSON.parse(JSON.stringify(bark));
+    dev2.social.twitter = "NEWtwitter"
   </script>
 
 </body>
