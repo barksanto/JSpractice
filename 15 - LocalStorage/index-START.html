@@ -24,7 +24,7 @@
       <input type="submit" value="+ Add Item">
       <button class="delete-all">Delete All</button>
       <button class="check-all">Check All</button>
-      <button class="check-all">Uncheck All</button>
+      <button class="uncheck-all">Uncheck All</button>
     </form>
   </div>
 
@@ -33,6 +33,7 @@
   const itemsList = document.querySelector('.plates');
   const deleteBtn = document.querySelector('.delete-all');
   const checkAllBtn = document.querySelector('.check-all');
+  const uncheckAllBtn = document.querySelector('.uncheck-all');
   // check if theres something in local storage then or fall back to an empty array
   let items = JSON.parse(localStorage.getItem('items')) || []; 
 
@@ -92,6 +93,8 @@
     })
   }
 
+
+  uncheckAllBtn.addEventListener('click', uncheckAll);
   checkAllBtn.addEventListener('click', checkAll);
   deleteBtn.addEventListener('click', deleteAll);
   addItems.addEventListener('submit', addItem);
