@@ -62,8 +62,23 @@
     const sliderImages = document.querySelectorAll('.slide-in');
 
     function checkSlide(e){
-      console.log(e)
+      // console.log(e);
+      sliderImages.forEach(sliderImage => {
+        // gives us the pixel level for where we currently are at the bottom of page
+        // - sliderImage.height / 2; alows us to slide the img in when its at the middle instead of the very bottom
+        const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
+        // console.log(slideInAt);
+        const imageBottom = sliderImage.offsetTop + sliderImage.height;
+        // console.log(imageBottom)
+        const isHalfShown = slideInAt > sliderImage.offsetTop;
+        const isNotScrolledPast = window.scrollY < imageBottom;
 
+        if (isHalfShown && isNotScrolledPast) {
+          sliderImage.classList.add('active');
+        } else {
+          sliderImage.classList.remove('active');
+        }
+      });
     }
 
     window.addEventListener('scroll', debounce(checkSlide));
