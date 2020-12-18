@@ -7,17 +7,20 @@
 </head>
 <body>
 <script>
-  let konamiArr = []
-  const secretCode = 'barkley';
+  let pressed = []
+  const code = 'barkley'
+
   window.addEventListener('keyup', (e) => {
     // console.log(e.key);
-    konamiArr.push(e.key);
-    konamiArr.splice(-konamiArr.length - 1, konamiArr.length - secretCode.length);
-    if(konamiArr.join('').includes(secretCode)){
-      console.log("You guessed the code!");
+    pressed.push(e.key);
+    // start from the end - if im looking for 6 letters, count fro the back, go 7 letters
+    pressed.splice(-code.length - 1, pressed.length - code.length);
+    // console.log(pressed);
+    if (pressed.join('').includes(code)){
+      console.log('nice job!');
       cornify_add()
-    } else {
-      console.log('not yet');
+    } else{
+      console.log('not yet!');
     }
   })
 </script>
