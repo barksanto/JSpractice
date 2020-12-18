@@ -28,7 +28,8 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  // check if theres something in local storage then or fall back to an empty array
+  const items = JSON.parse(localStorage.getItem('items')) || []; 
 
   function addItem(e){
     //form submit default is to reload the page so we're preventing it here
@@ -39,7 +40,7 @@
       text,   // ortext: text,
       done: false
     };
-    // push new item into items array
+    // push new item into items array- when we add an item we move it into localStorage
     items.push(item);
     populateList(items, itemsList);
     localStorage.setItem('items', JSON.stringify(items));
@@ -55,13 +56,18 @@
           <label for="item${index}">${plate.text}<label>
         </li> 
       `;
-    }).join(''); //join takes teh array and turns it to one big string
+    }).join(''); //join takes the array and turns it to one big string
+  }
+
+  function toggleDone(e){
+    if(!e.target.matches('input')) return //skip this unless its an input
+    console.log(e.target);
   }
 
 
-
   addItems.addEventListener('submit', addItem);
-
+  itemsList.addEventListener('click', toggleDone)
+  populateList(items, itemsList)
 </script>
 
 
