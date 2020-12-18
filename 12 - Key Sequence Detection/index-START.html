@@ -7,6 +7,15 @@
 </head>
 <body>
 <script>
+  let konamiArr = []
+  const secretCode = 'barkley';
+  window.addEventListener('keyup', (e) => {
+    console.log(e.key);
+    konamiArr.push(e.key);
+    konamiArr.splice(-konamiArr.length - 1, konamiArr.length - secretCode.length);
+    console.log(konamiArr);
+
+  })
 </script>
 </body>
 </html>
