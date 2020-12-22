@@ -8,9 +8,24 @@ const snap = document.querySelector('.snap');
 function getVideo() {
   navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(localMediaStream => {
-      console.log(localMediaStream);
-      video.src = localMediaStream; //this is an object right now, we need to convert it to a url
-})
+      video.srcObject = localMediaStream; //this is an object right now, we need to convert it to a url
+      video.play();
+    })
+    .catch(err => {
+      console.log("OH NOO", err);
+    })
 }
 
-getVideo();
+function paintToCanvas (){
+  // get width and height of our video
+  const width = video.videoWidth;
+  const height = video.videoHeight;
+
+  //check width and height of our canvas
+  //make canvas same size as video
+  canvas.width = width;
+  canvas.height = height;
+  
+
+
+}
