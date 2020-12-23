@@ -33,12 +33,16 @@
     document.body.append(highlight);
 
     function highlightLink() {
-      console.log('highlight!!')
+      // at this point 'this' will be the anchor tag
+      // console.log('highlight!!');
+      // console.log(linkCoords);
+      const linkCoords = this.getBoundingClientRect();
+      highlight.style.width = `${linkCoords.width}px`;
+      highlight.style.height = `${linkCoords.height}px`;
+      highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`
     }
 
-    triggers.forEach(trigger => {
-      trigger.addEventListener('mouseenter', highlightLink)
-    })
+    triggers.forEach(trigger => trigger.addEventListener('mouseenter', highlightLink))
   </script>
 </body>
 </html>
