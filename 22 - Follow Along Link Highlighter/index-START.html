@@ -36,10 +36,17 @@
       // at this point 'this' will be the anchor tag
       // console.log('highlight!!');
       // console.log(linkCoords);
+      // linkCoords is just the current a tag
       const linkCoords = this.getBoundingClientRect();
-      highlight.style.width = `${linkCoords.width}px`;
-      highlight.style.height = `${linkCoords.height}px`;
-      highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`
+      const coords = {
+        width: linkCoords.width,
+        height: linkCoords.height,
+        top: linkCoords.top + window.scrollY, // adding the pixels from scrolling
+        left: linkCoords.left + window.scrollX,
+      }  // white span moved in relation from top of page , now itll be set from starting point in viewport
+      highlight.style.width = `${coords.width}px`; // set highlight span to same width and height as parent
+      highlight.style.height = `${coords.height}px`;
+      highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`
     }
 
     triggers.forEach(trigger => trigger.addEventListener('mouseenter', highlightLink))
