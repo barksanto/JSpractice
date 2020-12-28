@@ -43,6 +43,7 @@
 <button></button>
 <script>
   const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
 
   function logText(e){
     console.log(this.classList.value);
@@ -50,8 +51,16 @@
   }
 
   divs.forEach(div => div.addEventListener('click', logText, {
-    capture: false // this is the default
+    capture: false, // this is the default, capture true makes it go on the way down 'one'
+    once: true // listens for a click and then unbinds itself
   }));
+
+  button.addEventListener('click', () => { // making a button only clickable once- especially important for checkout
+    console.log('Click!!!');
+  }, {
+    once: true
+  });
+
 </script>
 </body>
 </html>
