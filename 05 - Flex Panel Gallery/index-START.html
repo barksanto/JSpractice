@@ -24,7 +24,7 @@
     }
 
     .panels {
-      min-height: 100vh;
+      min-height: 50vh;
       overflow: hidden;
       display: flex;
 
@@ -123,18 +123,22 @@
   </div>
 
   <script>
+    //find all elements with panel class
     const panels = document.querySelectorAll('.panel');
 
+    // toggles the open class
     function toggleOpen(){
       this.classList.toggle('open');
     }
 
+    //toggles open active if the element has a property of flex
     function toggleActive(e){
       if (e.propertyName.includes('flex')){
         this.classList.toggle('open-active');
       }
     }
 
+    // add an event listener for click and for transition end then we'll call toggleActive function
     panels.forEach(panel => panel.addEventListener('click', toggleOpen));
     panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
 
