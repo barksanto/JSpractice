@@ -35,6 +35,7 @@
   </div>
 
   <script>
+    //holes is a node list that contains all 6 of our holes
     const holes = document.querySelectorAll('.hole');
     const scoreBoard = document.querySelector('.score');
     const moles = document.querySelectorAll('.mole');
@@ -44,7 +45,8 @@
     }
 
     function randomHole(holes) {
-
+      const indx = Math.floor(Math.random() * holes.length);
+      const hole = holes[indx];
     }
 
   </script>
